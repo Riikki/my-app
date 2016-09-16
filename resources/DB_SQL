@@ -1,7 +1,7 @@
 CREATE TABLE `Payment`
 (
-Id bigint NOT NULL,
-Payment_Status bigint NOT NULL,
+Id bigint NOT NULL AUTO_INCREMENT,
+Payment_Status tinyint NOT NULL,
 
 PRIMARY KEY (`Id`)
 );
@@ -9,9 +9,9 @@ PRIMARY KEY (`Id`)
 
 CREATE TABLE `User`
 (
-Id bigint NOT NULL,
-First_Name varchar(255) NOT NULL,
-Last_Name varchar(255) NOT NULL,
+Id bigint NOT NULL AUTO_INCREMENT,
+First_Name varchar(255),
+Last_Name varchar(255),
 Email varchar(255) NOT NULL,
 
 PRIMARY KEY (`Id`)
@@ -20,7 +20,7 @@ PRIMARY KEY (`Id`)
 
 CREATE TABLE `Order`
 (
-Id bigint NOT NULL,
+Id bigint NOT NULL AUTO_INCREMENT,
 Payment_Id bigint NOT NULL,
 Start_Date datetime NOT NULL,
 End_Date datetime NOT NULL,
@@ -38,11 +38,11 @@ FOREIGN KEY (`Payment_Id`) REFERENCES `Payment`(`Id`)
 
 CREATE TABLE `Asset`
 (
-Id bigint NOT NULL,
+Id bigint NOT NULL AUTO_INCREMENT,
 Order_Id bigint NOT NULL,
 Size varchar(255) NOT NULL,
-Asset_URL text NOT NULL,
-Click_URL text NOT NULL,
+Asset_URL varchar(1024) NOT NULL,
+Click_URL varchar(1024) NOT NULL,
 Created_Date datetime NOT NULL,
 Modified_Date datetime NOT NULL,
 State varchar(255) NOT NULL,
@@ -55,7 +55,7 @@ FOREIGN KEY (`Order_Id`) REFERENCES `Order`(`Id`)
 
 CREATE TABLE `Campaign`
 (
-Id bigint NOT NULL,
+Id bigint NOT NULL AUTO_INCREMENT,
 Provider varchar(255) NOT NULL,
 Provider_Id bigint NOT NULL,
 Name varchar(255) NOT NULL,
@@ -70,7 +70,6 @@ State varchar(255) NOT NULL,
 Submit_Date datetime NOT NULL,
 Modified_Date datetime NOT NULL,
 Order_Id bigint NOT NULL,
-Published tinyint NOT NULL,
 
 PRIMARY KEY (`Id`),
 FOREIGN KEY (`Order_Id`) REFERENCES `Order`(`Id`)
@@ -79,12 +78,12 @@ FOREIGN KEY (`Order_Id`) REFERENCES `Order`(`Id`)
 
 CREATE TABLE `Creative`
 (
-Id bigint NOT NULL,
+Id bigint NOT NULL AUTO_INCREMENT,
 Campaign_Id bigint NOT NULL,
 Asset_Id bigint NOT NULL,
 Provider_Id bigint NOT NULL,
-Creative_URL text NOT NULL,
-Click_URL text NOT NULL,
+Creative_URL varchar(1024) NOT NULL,
+Click_URL varchar(1024) NOT NULL,
 Size varchar(255) NOT NULL,
 State varchar(255) NOT NULL,
 
@@ -96,13 +95,13 @@ FOREIGN KEY (`Asset_Id`) REFERENCES `Asset`(`Id`)
 
 CREATE TABLE `Creative_Snapshot`
 (
-Id bigint NOT NULL,
+Id bigint NOT NULL AUTO_INCREMENT,
 Campaign_Id bigint NOT NULL,
 Creative_Id bigint NOT NULL,
 Asset_Id bigint NOT NULL,
 Provider_Id bigint NOT NULL,
-Creative_URL text NOT NULL,
-Click_URL text NOT NULL,
+Creative_URL varchar(1024) NOT NULL,
+Click_URL varchar(1024) NOT NULL,
 Size varchar(255) NOT NULL,
 State varchar(255) NOT NULL,
 Created_Date datetime NOT NULL,
@@ -118,7 +117,7 @@ FOREIGN KEY (`Asset_Id`) REFERENCES `Asset`(`Id`)
 
 CREATE TABLE `Campaign_Snapshot`
 (
-Id bigint NOT NULL,
+Id bigint NOT NULL AUTO_INCREMENT,
 Campaign_Id bigint NOT NULL,
 Order_Id bigint NOT NULL,
 Provider_Id bigint NOT NULL,
@@ -143,7 +142,7 @@ FOREIGN KEY (`Order_Id`) REFERENCES `Order`(`Id`)
 
 CREATE TABLE `Campaign_Performance`
 (
-Id bigint NOT NULL,
+Id bigint NOT NULL AUTO_INCREMENT,
 Campaign_Id bigint NOT NULL,
 Date datetime NOT NULL,
 Impressions bigint NOT NULL,
