@@ -1,0 +1,155 @@
+CREATE TABLE `Payment`
+(
+Id bigint NOT NULL AUTO_INCREMENT,
+Payment_Status tinyint NOT NULL,
+
+PRIMARY KEY (`Id`)
+);
+
+
+CREATE TABLE `User`
+(
+Id bigint NOT NULL AUTO_INCREMENT,
+First_Name varchar(255),
+Last_Name varchar(255),
+Email varchar(255) NOT NULL,
+
+PRIMARY KEY (`Id`)
+);
+
+
+CREATE TABLE `Order`
+(
+Id bigint NOT NULL AUTO_INCREMENT,
+Payment_Id bigint NOT NULL,
+Start_Date datetime NOT NULL,
+End_Date datetime NOT NULL,
+Price_Paid decimal NOT NULL,
+State varchar(255) NOT NULL,
+Created_Date datetime NOT NULL,
+Modified_Date datetime NOT NULL,
+User_Id bigint NOT NULL,
+
+PRIMARY KEY (`Id`),
+FOREIGN KEY (`User_Id`) REFERENCES `User`(`Id`),
+FOREIGN KEY (`Payment_Id`) REFERENCES `Payment`(`Id`)
+);
+
+
+CREATE TABLE `Asset`
+(
+Id bigint NOT NULL AUTO_INCREMENT,
+Order_Id bigint NOT NULL,
+Size varchar(255) NOT NULL,
+Asset_URL varchar(1024) NOT NULL,
+Click_URL varchar(1024) NOT NULL,
+Created_Date datetime NOT NULL,
+Modified_Date datetime NOT NULL,
+State varchar(255) NOT NULL,
+
+
+PRIMARY KEY (`Id`),
+FOREIGN KEY (`Order_Id`) REFERENCES `Order`(`Id`)
+);
+
+
+CREATE TABLE `Campaign`
+(
+Id bigint NOT NULL AUTO_INCREMENT,
+Provider varchar(255) NOT NULL,
+Provider_Id bigint NOT NULL,
+Name varchar(255) NOT NULL,
+Target_Impressions bigint NOT NULL,
+Target_Clicks bigint NOT NULL,
+Price decimal NOT NULL,
+Daily_Budget decimal NOT NULL,
+Start_Date datetime NOT NULL,
+End_Date datetime NOT NULL,
+Location_Id text NOT NULL,
+State varchar(255) NOT NULL,
+Submit_Date datetime NOT NULL,
+Modified_Date datetime NOT NULL,
+Order_Id bigint NOT NULL,
+
+PRIMARY KEY (`Id`),
+FOREIGN KEY (`Order_Id`) REFERENCES `Order`(`Id`)
+);
+
+
+CREATE TABLE `Creative`
+(
+Id bigint NOT NULL AUTO_INCREMENT,
+Campaign_Id bigint NOT NULL,
+Asset_Id bigint NOT NULL,
+Provider_Id bigint NOT NULL,
+Creative_URL varchar(1024) NOT NULL,
+Click_URL varchar(1024) NOT NULL,
+Size varchar(255) NOT NULL,
+State varchar(255) NOT NULL,
+
+PRIMARY KEY (`Id`),
+FOREIGN KEY (`Campaign_Id`) REFERENCES `Campaign`(`Id`),
+FOREIGN KEY (`Asset_Id`) REFERENCES `Asset`(`Id`)
+);
+
+
+CREATE TABLE `Creative_Snapshot`
+(
+Id bigint NOT NULL AUTO_INCREMENT,
+Campaign_Id bigint NOT NULL,
+Creative_Id bigint NOT NULL,
+Asset_Id bigint NOT NULL,
+Provider_Id bigint NOT NULL,
+Creative_URL varchar(1024) NOT NULL,
+Click_URL varchar(1024) NOT NULL,
+Size varchar(255) NOT NULL,
+State varchar(255) NOT NULL,
+Created_Date datetime NOT NULL,
+Modified_Date datetime NOT NULL,
+
+PRIMARY KEY (`Id`),
+FOREIGN KEY (`Campaign_Id`) REFERENCES `Campaign`(`Id`),
+FOREIGN KEY (`Creative_Id`) REFERENCES `Creative`(`Id`),
+FOREIGN KEY (`Asset_Id`) REFERENCES `Asset`(`Id`)
+);
+
+
+
+CREATE TABLE `Campaign_Snapshot`
+(
+Id bigint NOT NULL AUTO_INCREMENT,
+Campaign_Id bigint NOT NULL,
+Order_Id bigint NOT NULL,
+Provider_Id bigint NOT NULL,
+Provider varchar(255) NOT NULL,
+Name varchar(255) NOT NULL,
+Target_Impressions bigint NOT NULL,
+Target_Clicks bigint NOT NULL,
+Price decimal NOT NULL,
+Daily_Budget decimal NOT NULL,
+Start_Date datetime NOT NULL,
+End_Date datetime NOT NULL,
+Location_Id text NOT NULL,
+State varchar(255) NOT NULL,
+Submit_Date datetime NOT NULL,
+Modified_Date datetime NOT NULL,
+
+PRIMARY KEY (`Id`),
+FOREIGN KEY (`Campaign_Id`) REFERENCES `Campaign`(`Id`),
+FOREIGN KEY (`Order_Id`) REFERENCES `Order`(`Id`)
+);
+
+
+CREATE TABLE `Campaign_Performance`
+(
+Id bigint NOT NULL AUTO_INCREMENT,
+Campaign_Id bigint NOT NULL,
+Date datetime NOT NULL,
+Impressions bigint NOT NULL,
+Clicks bigint NOT NULL,
+Created_Date datetime NOT NULL,
+Modified_Date datetime NOT NULL,
+
+PRIMARY KEY (`Id`),
+FOREIGN KEY (`Id`) REFERENCES `Campaign`(`Id`)
+);
