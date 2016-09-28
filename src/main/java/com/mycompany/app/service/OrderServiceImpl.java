@@ -1,11 +1,12 @@
-package com.mycompany.app.model;
+package com.mycompany.app.service;
 
+import com.mycompany.app.model.OrderService;
 import org.springframework.stereotype.Component;
 
 import java.util.concurrent.atomic.AtomicLong;
 
 @Component
-public class SimpleOrder implements Order{
+public class OrderServiceImpl implements OrderService {
 
   public long id;
   public String name;
@@ -127,12 +128,12 @@ public class SimpleOrder implements Order{
     this.name = name;
   }
 
-  public Order createOrder() {
+  public OrderService createOrder() {
     this.setId(counter.incrementAndGet());
     return this;
   }
 
-  public Order getOrderById(Long id) {
+  public OrderService getOrderById(Long id) {
     this.setId(1);
     this.setName("test");
     return this;
