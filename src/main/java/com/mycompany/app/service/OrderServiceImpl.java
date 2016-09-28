@@ -1,6 +1,8 @@
 package com.mycompany.app.service;
 
-import com.mycompany.app.model.OrderService;
+import com.mycompany.app.domain.OrderDomain;
+import com.mycompany.app.modelInterface.OrderService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.concurrent.atomic.AtomicLong;
@@ -8,134 +10,19 @@ import java.util.concurrent.atomic.AtomicLong;
 @Component
 public class OrderServiceImpl implements OrderService {
 
-  public long id;
-  public String name;
-  public int paymentId;
-  public int userId;
-  public int startDate;
-  public int endDate;
-  public int pricePaid;
-  public int state;
-  public int crearedDate;
-  public int modifiedDate;
-  public int locations;
-  public int targetImpressions;
-  public int targetClicks;
+  @Autowired
+  private OrderDomain orderDomain;
 
   private final AtomicLong counter = new AtomicLong();
 
-  public int getPaymentId() {
-    return paymentId;
-  }
-
-  public void setPaymentId(int paymentId) {
-    this.paymentId = paymentId;
-  }
-
-  public int getUserId() {
-    return userId;
-  }
-
-  public void setUserId(int userId) {
-    this.userId = userId;
-  }
-
-  public int getStartDate() {
-    return startDate;
-  }
-
-  public void setStartDate(int startDate) {
-    this.startDate = startDate;
-  }
-
-  public int getEndDate() {
-    return endDate;
-  }
-
-  public void setEndDate(int endDate) {
-    this.endDate = endDate;
-  }
-
-  public int getPricePaid() {
-    return pricePaid;
-  }
-
-  public void setPricePaid(int pricePaid) {
-    this.pricePaid = pricePaid;
-  }
-
-  public int getState() {
-    return state;
-  }
-
-  public void setState(int state) {
-    this.state = state;
-  }
-
-  public int getCrearedDate() {
-    return crearedDate;
-  }
-
-  public void setCrearedDate(int crearedDate) {
-    this.crearedDate = crearedDate;
-  }
-
-  public int getModifiedDate() {
-    return modifiedDate;
-  }
-
-  public void setModifiedDate(int modifiedDate) {
-    this.modifiedDate = modifiedDate;
-  }
-
-  public int getLocations() {
-    return locations;
-  }
-
-  public void setLocations(int locations) {
-    this.locations = locations;
-  }
-
-  public int getTargetImpressions() {
-    return targetImpressions;
-  }
-
-  public void setTargetImpressions(int targetImpressions) {
-    this.targetImpressions = targetImpressions;
-  }
-
-  public int getTargetClicks() {
-    return targetClicks;
-  }
-
-  public void setTargetClicks(int targetClicks) {
-    this.targetClicks = targetClicks;
-  }
-
-  public long getId() {
-    return id;
-  }
-
-  public void setId(long id) {
-    this.id = id;
-  }
-
-  public String getName() {
-    return name;
-  }
-
-  public void setName(String name) {
-    this.name = name;
-  }
-
   public OrderService createOrder() {
-    this.setId(counter.incrementAndGet());
+    orderDomain.setId(counter.incrementAndGet());
     return this;
   }
 
   public OrderService getOrderById(Long id) {
-    this.setId(1);
-    this.setName("test");
+    orderDomain.setId(1);
+    orderDomain.setName("test");
     return this;
   }
 }
