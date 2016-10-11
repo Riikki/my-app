@@ -1,8 +1,12 @@
 package com.mycompany.app.modelInterface;
 
+import com.mycompany.app.domain.OrderDomain;
+
 public interface OrderService {
 
-  OrderService createOrder();
+  OrderDomain createOrder();
 
-  OrderService getOrderById(Long id);
+  OrderDomain getOrderById(Long id);
+
+
 }
