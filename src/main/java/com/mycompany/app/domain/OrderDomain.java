@@ -1,20 +1,19 @@
 package com.mycompany.app.domain;
 
+import java.util.Date;
+
 public class OrderDomain {
 
   public long id;
-  public String name;
   public int paymentId;
   public int userId;
-  public int startDate;
-  public int endDate;
+  public Date startDate;
+  public Date endDate;
   public int pricePaid;
-  public int state;
-  public int crearedDate;
-  public int modifiedDate;
-  public int locations;
-  public int targetImpressions;
-  public int targetClicks;
+  public String state;
+  public Date createdDate;
+  public Date modifiedDate;
+
 
   public long getId() {
     return id;
@@ -22,14 +21,6 @@ public class OrderDomain {
 
   public void setId(long id) {
     this.id = id;
-  }
-
-  public String getName() {
-    return name;
-  }
-
-  public void setName(String name) {
-    this.name = name;
   }
 
   public int getPaymentId() {
@@ -48,19 +39,19 @@ public class OrderDomain {
     this.userId = userId;
   }
 
-  public int getStartDate() {
+  public Date getStartDate() {
     return startDate;
   }
 
-  public void setStartDate(int startDate) {
+  public void setStartDate(Date startDate) {
     this.startDate = startDate;
   }
 
-  public int getEndDate() {
+  public Date getEndDate() {
     return endDate;
   }
 
-  public void setEndDate(int endDate) {
+  public void setEndDate(Date endDate) {
     this.endDate = endDate;
   }
 
@@ -72,51 +63,28 @@ public class OrderDomain {
     this.pricePaid = pricePaid;
   }
 
-  public int getState() {
+  public String getState() {
     return state;
   }
 
-  public void setState(int state) {
+  public void setState(String state) {
     this.state = state;
   }
 
-  public int getCrearedDate() {
-    return crearedDate;
+  public Date getCrearedDate() {
+    return createdDate;
   }
 
-  public void setCrearedDate(int crearedDate) {
-    this.crearedDate = crearedDate;
+  public void setCreatedDate(Date createdDate) {
+    this.createdDate = createdDate;
   }
 
-  public int getModifiedDate() {
+  public Date getModifiedDate() {
     return modifiedDate;
   }
 
-  public void setModifiedDate(int modifiedDate) {
+  public void setModifiedDate(Date modifiedDate) {
     this.modifiedDate = modifiedDate;
   }
 
-  public int getLocations() {
-    return locations;
-  }
-
-  public void setLocations(int locations) {
-    this.locations = locations;
-  }
-
-  public int getTargetImpressions() {
-    return targetImpressions;
-  }
-
-  public void setTargetImpressions(int targetImpressions) {
-    this.targetImpressions = targetImpressions;
-  }
-
-  public int getTargetClicks() {
-    return targetClicks;
-  }
-
-  public void setTargetClicks(int targetClicks) {
-    this.targetClicks = targetClicks;
-  }
 }
