@@ -19,7 +19,7 @@ public class OrderRowMapper implements RowMapper {
         orderDomain.setPricePaid(resultSet.getInt("Price_Paid"));
         orderDomain.setState(resultSet.getString("State"));
         orderDomain.setCreatedDate(resultSet.getDate("Created_Date"));
-        orderDomain.setModifiedDate(resultSet.getDate("Modified_Date"));
+        orderDomain.setModifiedDate(resultSet.getDate("Created_Date"));
         return orderDomain;
     }
 }

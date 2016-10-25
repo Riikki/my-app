@@ -2,7 +2,7 @@ package com.mycompany.app.service;
 
 import com.mycompany.app.domain.OrderDomain;
 import com.mycompany.app.mapper.OrderRowMapper;
-import com.mycompany.app.modelInterface.OrderService;
+import com.mycompany.app.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
@@ -20,33 +20,16 @@ import java.util.concurrent.atomic.AtomicLong;
 public class OrderServiceImpl implements OrderService {
 
   @Autowired
-  private JdbcTemplate jdbcTemplate;
-
-  private final AtomicLong counter = new AtomicLong();
+  private OrderRepository orderRepository;
 
   public OrderDomain createOrder() {
-    long  userId = 1;
-    KeyHolder keyHolder = new GeneratedKeyHolder();
-    String SQL = "INSERT INTO `Order` (`User_id`) VALUES (?)";
-    jdbcTemplate.update(new PreparedStatementCreator() {
-
-      @Override
-      public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
-        PreparedStatement ps = connection.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
-        ps.setLong(1, userId);
-        return ps;
-      }
-    }, keyHolder);
-
-    return getOrderById(keyHolder.getKey().longValue());
+    Long id = new Long(1);
+    return orderRepository.createOrder(id);
   }
 
 
   public OrderDomain getOrderById(Long id) {
-    String sql = "SELECT * FROM `Order` WHERE `id` = ?";
-
-    return (OrderDomain) jdbcTemplate.queryForObject(
-            sql, new Object[] { id }, new OrderRowMapper());
+  return orderRepository.getOrderById(id);
   }
 
 }

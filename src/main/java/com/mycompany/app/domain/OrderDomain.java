@@ -4,15 +4,15 @@ import java.util.Date;
 
 public class OrderDomain {
 
-  public long id;
-  public int paymentId;
-  public int userId;
-  public Date startDate;
-  public Date endDate;
-  public int pricePaid;
-  public String state;
-  public Date createdDate;
-  public Date modifiedDate;
+  private Long id;
+  private Integer paymentId;
+  private Integer userId;
+  private Date startDate;
+  private Date endDate;
+  private Integer pricePaid;
+  private String state;
+  private Date createdDate;
+  private Date modifiedDate;
 
 
   public long getId() {

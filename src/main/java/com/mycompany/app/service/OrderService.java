@@ -1,4 +1,4 @@
-package com.mycompany.app.modelInterface;
+package com.mycompany.app.service;
 
 import com.mycompany.app.domain.OrderDomain;
 

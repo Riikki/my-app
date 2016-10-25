@@ -1,11 +1,8 @@
 package com.mycompany.app.controller;
 
 import com.mycompany.app.domain.OrderDomain;
-import com.mycompany.app.service.OrderServiceImpl;
-import com.mycompany.app.modelInterface.OrderService;
+import com.mycompany.app.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
