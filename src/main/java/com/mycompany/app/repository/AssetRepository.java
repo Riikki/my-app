@@ -1,7 +1,7 @@
 package com.mycompany.app.repository;
 
-import com.mycompany.app.domain.OrderDomain;
-import com.mycompany.app.mapper.OrderRowMapper;
+import com.mycompany.app.domain.AssetDomain;
+import com.mycompany.app.mapper.AssetRowMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
@@ -15,34 +15,33 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 @Component
-public class OrderRepository {
+public class AssetRepository {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
 
-    public OrderDomain createOrder(Long userId) {
+    public AssetDomain createAsset(Long orderId) {
         KeyHolder keyHolder = new GeneratedKeyHolder();
-        String SQL = "INSERT INTO `Order` (`User_id`) VALUES (?)";
+        String SQL = "INSERT INTO `Asset` (`Order_Id`) VALUES (?)";
         jdbcTemplate.update(new PreparedStatementCreator() {
 
             @Override
             public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
                 PreparedStatement ps = connection.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
-                ps.setLong(1, userId);
+                ps.setLong(1, orderId);
                 return ps;
             }
         }, keyHolder);
 
-        return getOrderById(keyHolder.getKey().longValue());
+        return getAssetById(keyHolder.getKey().longValue());
+    }
+
+    public AssetDomain getAssetById(Long id) {
+        String sql = "SELECT * FROM `Asset` WHERE `id` = ?";
+        return (AssetDomain) jdbcTemplate.queryForObject(sql, new Object[] { id }, new AssetRowMapper());
     }
 
 
-    public OrderDomain getOrderById(Long id) {
-        String sql = "SELECT * FROM `Order` WHERE `id` = ?";
-
-        return (OrderDomain) jdbcTemplate.queryForObject(
-                sql, new Object[] { id }, new OrderRowMapper());
-    }
 
 }
